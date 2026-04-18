@@ -9,4 +9,11 @@ import mongoose from "mongoose";
  */
 export function validateObjectId(req, res, next) {
   // Your code here
+  if (req.params.id && mongoose.Types.ObjectId.isValid(req.params.id)) {
+    next();
+  } else {
+    return res.status(400).json({
+      error: { message: "Invalid id" },
+    });
+  }
 }
